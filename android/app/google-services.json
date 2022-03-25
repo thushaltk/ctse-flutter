@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880049747644",
+    "project_id": "humanoid-ctse",
+    "storage_bucket": "humanoid-ctse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880049747644:android:e59195b65752e0ae1382b9",
+        "android_client_info": {
+          "package_name": "com.example.humanoid_ctse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880049747644-tvhu2j421ug9u29rji04os1jqc2q6o79.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcwMA5PljZGJR0U8T_tiY8GfX3mDj00sI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880049747644-tvhu2j421ug9u29rji04os1jqc2q6o79.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

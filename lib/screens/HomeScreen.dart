@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:humanoid_ctse/widgets/NavigationDrawerWidget.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const routeName = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/AdminLoginScreen.dart';
+import 'package:humanoid_ctse/screens/HomeScreen.dart';
 
 class NavigationDrawyerWidget extends StatelessWidget {
   const NavigationDrawyerWidget({Key? key}) : super(key: key);
@@ -61,21 +63,22 @@ class NavigationDrawyerWidget extends StatelessWidget {
                 child: ListView(
                   children: <Widget>[
                     buildMenuItem(
-                      text: 'Home',
-                      icon: Icons.home_filled
-                    ),
+                      text: 'Home', 
+                      icon: Icons.home_filled,
+                      tapHandler: () {
+                          Navigator.of(context)
+                              .pushNamed(HomeScreen.routeName);
+                        }
+                      ),
+                    buildMenuItem(text: 'Help', icon: Icons.help),
+                    buildMenuItem(text: 'Share', icon: Icons.share),
                     buildMenuItem(
-                      text: 'Help',
-                      icon: Icons.help
-                    ),
-                    buildMenuItem(
-                      text: 'Share',
-                      icon: Icons.share
-                    ),
-                    buildMenuItem(
-                      text: 'Admin',
-                      icon: Icons.admin_panel_settings
-                    )
+                        text: 'Admin',
+                        icon: Icons.admin_panel_settings,
+                        tapHandler: () {
+                          Navigator.of(context)
+                              .pushNamed(AdminLoginScreen.routeName);
+                        }),
                   ],
                 ),
               )
@@ -86,16 +89,20 @@ class NavigationDrawyerWidget extends StatelessWidget {
     );
   }
 
-  Widget buildMenuItem({
-    required String text,
-    required IconData icon
-  }) {
+  Widget buildMenuItem(
+      {required String text,
+      required IconData icon,
+      VoidCallback? tapHandler}) {
     final color = Color.fromARGB(255, 1, 77, 123);
 
     return ListTile(
-      leading: Icon(icon, color: color,),
-      title: Text(text, style: TextStyle(color: color, fontSize: 20, fontFamily: "Tenorite")),
-      onTap: () {},
+      leading: Icon(
+        icon,
+        color: color,
+      ),
+      title: Text(text,
+          style: TextStyle(color: color, fontSize: 20, fontFamily: "Tenorite")),
+      onTap: tapHandler,
     );
   }
 }

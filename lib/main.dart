@@ -1,30 +1,54 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/AdminLoginScreen.dart';
+import 'package:humanoid_ctse/screens/DashboardAdminScreen.dart';
 import 'package:humanoid_ctse/screens/HomeScreen.dart';
+import 'package:humanoid_ctse/services/HeadServices.dart';
 
-Map<int, Color> color =
-{
-50:Color.fromRGBO(1,77,123, .1),
-100:Color.fromRGBO(1,77,123, .2),
-200:Color.fromRGBO(1,77,123, .3),
-300:Color.fromRGBO(1,77,123, .4),
-400:Color.fromRGBO(1,77,123, .5),
-500:Color.fromRGBO(1,77,123, .6),
-600:Color.fromRGBO(1,77,123, .7),
-700:Color.fromRGBO(1,77,123, .8),
-800:Color.fromRGBO(1,77,123, .9),
-900:Color.fromRGBO(1,77,123, 1),
+Map<int, Color> color = {
+  50: Color.fromRGBO(1, 77, 123, .1),
+  100: Color.fromRGBO(1, 77, 123, .2),
+  200: Color.fromRGBO(1, 77, 123, .3),
+  300: Color.fromRGBO(1, 77, 123, .4),
+  400: Color.fromRGBO(1, 77, 123, .5),
+  500: Color.fromRGBO(1, 77, 123, .6),
+  600: Color.fromRGBO(1, 77, 123, .7),
+  700: Color.fromRGBO(1, 77, 123, .8),
+  800: Color.fromRGBO(1, 77, 123, .9),
+  900: Color.fromRGBO(1, 77, 123, 1),
 };
 
 MaterialColor colorCustom = MaterialColor(0xFF014D7B, color);
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  late HeadServices headServices;
+
+  initialise() {
+    headServices = HeadServices();
+    headServices.initialise();
+    headServices.getData().then(((value) => print(value)));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialise();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,6 +66,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: colorCustom,
       ),
       home: const HomeScreen(),
+      routes: {
+        AdminLoginScreen.routeName: (ctx) => const AdminLoginScreen(),
+        HomeScreen.routeName: (ctx) => const HomeScreen(),
+        DashboardAdminScreen.routeName : (ctx) => const DashboardAdminScreen()
+      },
     );
   }
 }
