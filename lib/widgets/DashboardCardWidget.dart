@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
 
 class DashboardCardWidget extends StatefulWidget {
   final Image imageUrl;
@@ -50,7 +51,9 @@ class _DashboardCardWidgetState extends State<DashboardCardWidget> {
                         color: Color.fromARGB(255, 1, 77, 123),
                         ),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushNamed(DashboardHeadScreen.routeName);
+                          },
                           child: const Icon(
                             Icons.settings,
                             color: Colors.white,

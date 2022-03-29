@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/AddHeadPartsScreen.dart';
 import 'package:humanoid_ctse/screens/AdminLoginScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardAdminScreen.dart';
+import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
 import 'package:humanoid_ctse/screens/HomeScreen.dart';
 import 'package:humanoid_ctse/services/HeadServices.dart';
 
@@ -35,12 +37,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  late HeadServices headServices;
+  HeadServices? headServices;
 
   initialise() {
     headServices = HeadServices();
-    headServices.initialise();
-    headServices.getData().then(((value) => print(value)));
+    headServices!.initialise();
+    headServices!.getData().then(((value) => print(value)));
   }
 
   @override
@@ -69,7 +71,9 @@ class _MyAppState extends State<MyApp> {
       routes: {
         AdminLoginScreen.routeName: (ctx) => const AdminLoginScreen(),
         HomeScreen.routeName: (ctx) => const HomeScreen(),
-        DashboardAdminScreen.routeName : (ctx) => const DashboardAdminScreen()
+        DashboardAdminScreen.routeName : (ctx) => const DashboardAdminScreen(),
+        DashboardHeadScreen.routeName : (ctx) => const DashboardHeadScreen(),
+        AddHeadPartsScreen.routeName : (ctx) => AddHeadPartsScreen(headServices: headServices!)
       },
     );
   }
