@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/DashboardHandsScreen.dart';
+import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
+import 'package:humanoid_ctse/screens/DashboardLegsScreen.dart';
+import 'package:humanoid_ctse/screens/DashboardTorsoScreen.dart';
 import 'package:humanoid_ctse/widgets/DashboardCardWidget.dart';
 
 class DashboardAdminScreen extends StatefulWidget {
@@ -45,10 +49,11 @@ class _DashboardAdminScreenState extends State<DashboardAdminScreen> {
           const SizedBox(
             height: 30,
           ),
-          DashboardCardWidget(imageUrl: Image.asset('assets/images/head.png'), name: "HEAD",),
-          DashboardCardWidget(imageUrl: Image.asset('assets/images/hand.png'), name: "HAND",),
-          DashboardCardWidget(imageUrl: Image.asset('assets/images/torso.png'), name: "TORSO",),
-          DashboardCardWidget(imageUrl: Image.asset('assets/images/legs.png'), name: "LEGS",),
+          DashboardCardWidget(imageUrl: Image.asset('assets/images/head.png'), name: "HEAD", routename: DashboardHeadScreen.routeName,),
+          DashboardCardWidget(imageUrl: Image.asset('assets/images/hand.png'), name: "HAND", 
+          routename: DashboardHandsScreen.routeName,),
+          DashboardCardWidget(imageUrl: Image.asset('assets/images/torso.png'), name: "TORSO", routename: DashboardTorsoScreen.routeName,),
+          DashboardCardWidget(imageUrl: Image.asset('assets/images/legs.png'), name: "LEGS", routename: DashboardLegsScreen.routeName,),
         ],
       ),
     );

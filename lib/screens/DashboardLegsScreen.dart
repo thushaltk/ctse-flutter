@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:humanoid_ctse/screens/AddHeadPartsScreen.dart';
+import 'package:humanoid_ctse/screens/AddLegsPartsScreen.dart';
+import 'package:humanoid_ctse/services/HandsServices.dart';
 import 'package:humanoid_ctse/services/HeadServices.dart';
+import 'package:humanoid_ctse/services/LegsServices.dart';
 import 'package:humanoid_ctse/widgets/ItemLongCardWidget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class DashboardHeadScreen extends StatefulWidget {
-  static const routeName = '/admin-head';
+class DashboardLegsScreen extends StatefulWidget {
+  static const routeName = '/admin-legs';
 
-  const DashboardHeadScreen({Key? key}) : super(key: key);
+  const DashboardLegsScreen({Key? key}) : super(key: key);
 
   @override
-  State<DashboardHeadScreen> createState() => _DashboardHeadScreenState();
+  State<DashboardLegsScreen> createState() => _DashboardLegsScreenState();
 }
 
-class _DashboardHeadScreenState extends State<DashboardHeadScreen> {
+class _DashboardLegsScreenState extends State<DashboardLegsScreen> {
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
-  late HeadServices headServices;
+  late LegsServices legsServices;
   List docs = [];
 
   initialise() {
-    headServices = HeadServices();
-    headServices.initialise();
-    headServices.getData().then((value) => {
+    legsServices = LegsServices();
+    legsServices.initialise();
+    legsServices.getData().then((value) => {
       setState((){
         docs = value;
       })
@@ -53,7 +56,7 @@ class _DashboardHeadScreenState extends State<DashboardHeadScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(AddHeadPartsScreen.routeName);
+            Navigator.of(context).pushNamed(AddLegsPartsScreen.routeName);
           },
           child: const Icon(Icons.add)),
       body: SmartRefresher(
@@ -80,11 +83,11 @@ class _DashboardHeadScreenState extends State<DashboardHeadScreen> {
                       children: [
                         Row(
                           children: [
-                            Image.asset('assets/images/head_white.png'),
+                            Image.asset('assets/images/legs_white.png'),
                             const Padding(
                               padding: EdgeInsets.fromLTRB(18.0, 10.0, 0, 0),
                               child: Text(
-                                "Head",
+                                "Legs",
                                 style: TextStyle(
                                     fontFamily: "Tenorite",
                                     color: Colors.white,
@@ -108,7 +111,7 @@ class _DashboardHeadScreenState extends State<DashboardHeadScreen> {
                     itemCount: docs.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ItemLongCardWidget(
-                        service: headServices,
+                        service: legsServices,
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],

@@ -34,13 +34,13 @@ class HandsServices {
 
   //add data
   Future<void> insertData(
-      String imageUrl, String name, String description, List diseases) async {
+      String? imageUrl, String name, String description) async {
     try {
       await firestore.collection("body-hands").add({
         'imageUrl': imageUrl,
         'name': name,
         'description': description,
-        'diseases': diseases
+        'diseases': []
       });
     } catch (e) {
       print(e);
@@ -48,12 +48,16 @@ class HandsServices {
   }
 
   //update data
-  Future<void> update(String id, String name, String code) async {
+  Future<void> update(String id, String name, String description, String imageUrl, String diseases) async {
     try {
       await firestore
           .collection("body-hands")
           .doc(id)
-          .update({'name': name, 'code': code});
+          .update({
+            'name': name, 
+            'description': description,
+            'imageUrl': imageUrl,
+            'diseases': []});
     } catch (e) {
       print(e);
     }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:humanoid_ctse/screens/EditHeadPartScreen.dart';
+
+import '../services/HeadServices.dart';
 
 class ItemLongCardWidget extends StatelessWidget {
+  final service;
   final String? id;
   final String? imageUrl;
   final String? name;
@@ -9,11 +14,24 @@ class ItemLongCardWidget extends StatelessWidget {
 
   ItemLongCardWidget(
       {Key? key,
+      required this.service,
       required this.id,
       required this.imageUrl,
       required this.name,
       required this.description})
       : super(key: key);
+
+  void onPressedDelete() async {
+    Fluttertoast.showToast(
+        msg: "Item Deleted!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    //await headServices.delete(id!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +75,19 @@ class ItemLongCardWidget extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          //Navigator.of(context).pushNamed(DashboardHeadScreen.routeName);
+                          //todo: Edit part
+                          Navigator.push(
+                            context, MaterialPageRoute(builder:
+                             (context) => EditHeadPartsScreen(
+                               description: description!, 
+                               headServices:service, 
+                               id: id!, 
+                               diseases: "diseases", 
+                               imageUrl: imageUrl!, 
+                               name: name!,
+                              )
+                            )
+                          );
                         },
                         child: const Icon(
                           Icons.edit,
@@ -81,7 +111,7 @@ class ItemLongCardWidget extends StatelessWidget {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            //Navigator.of(context).pushNamed(DashboardHeadScreen.routeName);
+                            onPressedDelete();
                           },
                           child: const Icon(
                             Icons.delete,

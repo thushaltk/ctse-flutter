@@ -12,7 +12,7 @@ class HeadServices {
     List docs = [];
 
     try {
-      querySnapshot = await firestore.collection("body-head").get();
+      querySnapshot = await firestore.collection("body-head").orderBy("name").get();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           Map temp = {
@@ -48,12 +48,16 @@ class HeadServices {
   }
 
   //update data
-  Future<void> update(String id, String name, String code) async {
+  Future<void> update(String id, String name, String description, String imageUrl, String diseases) async {
     try {
       await firestore
           .collection("body-head")
           .doc(id)
-          .update({'name': name, 'code': code});
+          .update({
+            'name': name, 
+            'description': description,
+            'imageUrl': imageUrl,
+            'diseases': []});
     } catch (e) {
       print(e);
     }

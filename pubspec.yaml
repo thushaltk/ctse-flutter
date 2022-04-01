@@ -34,6 +34,11 @@ dependencies:
   firebase_storage: ^10.2.9
   firebase_analytics: ^9.1.2
   pull_to_refresh: ^2.0.0
+  fluttertoast: ^8.0.9
+  svg_path_parser: ^1.1.1
+  touchable:
+  xml:
+  flutter_svg: ^1.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -66,12 +71,15 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
-    - assets/images/body.png
+    - assets/images/body.svg
     - assets/images/head.png
     - assets/images/hand.png
     - assets/images/torso.png
     - assets/images/legs.png
     - assets/images/head_white.png
+    - assets/images/torso_white.png
+    - assets/images/hands_white.png
+    - assets/images/legs_white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
 
 class DashboardCardWidget extends StatefulWidget {
+  final String routename;
   final Image imageUrl;
   final String name;
 
-  const DashboardCardWidget({ Key? key, required this.imageUrl, required this.name }) : super(key: key);
+  const DashboardCardWidget({ Key? key, required this.imageUrl, required this.name, required this.routename }) : super(key: key);
 
   @override
   State<DashboardCardWidget> createState() => _DashboardCardWidgetState();
@@ -52,7 +53,7 @@ class _DashboardCardWidgetState extends State<DashboardCardWidget> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushNamed(DashboardHeadScreen.routeName);
+                            Navigator.of(context).pushNamed(widget.routename);
                           },
                           child: const Icon(
                             Icons.settings,
