@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:humanoid_ctse/screens/EditHandPartScreen.dart';
 import 'package:humanoid_ctse/screens/EditHeadPartScreen.dart';
 
 import '../services/HeadServices.dart';
@@ -10,7 +11,7 @@ class ItemLongCardWidget extends StatelessWidget {
   final String? imageUrl;
   final String? name;
   final String? description;
-  final List? diseases = [];
+  final String? diseases;
 
   ItemLongCardWidget(
       {Key? key,
@@ -18,10 +19,12 @@ class ItemLongCardWidget extends StatelessWidget {
       required this.id,
       required this.imageUrl,
       required this.name,
-      required this.description})
+      required this.description,
+      required this.diseases})
       : super(key: key);
 
   void onPressedDelete() async {
+    await service.delete(id!);
     Fluttertoast.showToast(
         msg: "Item Deleted!",
         toastLength: Toast.LENGTH_SHORT,
@@ -30,7 +33,6 @@ class ItemLongCardWidget extends StatelessWidget {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-    //await headServices.delete(id!);
   }
 
   @override
@@ -78,11 +80,11 @@ class ItemLongCardWidget extends StatelessWidget {
                           //todo: Edit part
                           Navigator.push(
                             context, MaterialPageRoute(builder:
-                             (context) => EditHeadPartsScreen(
+                             (context) => EditHandPartsScreen(
                                description: description!, 
-                               headServices:service, 
+                               handServices:service, 
                                id: id!, 
-                               diseases: "diseases", 
+                               diseases: diseases!, 
                                imageUrl: imageUrl!, 
                                name: name!,
                               )

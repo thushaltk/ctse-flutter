@@ -114,7 +114,8 @@ class _DashboardHandsScreenState extends State<DashboardHandsScreen> {
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],
-                          description: docs[index]['description']);
+                          description: docs[index]['description'],
+                          diseases: docs[index]['diseases']);
                     }),
               ),
             ),

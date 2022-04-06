@@ -17,7 +17,7 @@ class TorsoServices {
         for (var doc in querySnapshot.docs.toList()) {
           Map temp = {
             "id": doc.id,
-            "imageURL": doc['imageURL'],
+            "imageURL": doc['imageUrl'],
             "name": doc['name'],
             "description": doc['description'],
             "diseases": doc['diseases']
@@ -33,14 +33,14 @@ class TorsoServices {
   }
 
   //add data
-  Future<void> insertData(
-      String? imageUrl, String name, String description) async {
+  Future<void> insertData(String? imageUrl, String name, String description,
+      String diseases) async {
     try {
       await firestore.collection("body-torso").add({
         'imageUrl': imageUrl,
         'name': name,
         'description': description,
-        'diseases': []
+        'diseases': diseases
       });
     } catch (e) {
       print(e);
@@ -48,16 +48,17 @@ class TorsoServices {
   }
 
   //update data
-  Future<void> update(String id, String name, String description, String imageUrl, String diseases) async {
+  Future<void> update(String id, String name, String description,
+      String imageUrl, String diseases) async {
     try {
-      await firestore
-          .collection("body-torso")
-          .doc(id)
-          .update({
-            'name': name, 
-            'description': description,
-            'imageUrl': imageUrl,
-            'diseases': []});
+      await firestore.collection("body-torso").doc(id).update(
+        {
+          'name': name,
+          'description': description,
+          'imageUrl': imageUrl,
+          'diseases': diseases
+        },
+      );
     } catch (e) {
       print(e);
     }

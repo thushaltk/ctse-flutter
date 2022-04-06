@@ -207,7 +207,7 @@ class _EditHeadPartsScreenState extends State<EditHeadPartsScreen> {
                               borderRadius: BorderRadius.circular(18.0),
                               side: const BorderSide(
                                   color: Color.fromARGB(255, 1, 77, 123)))),
-                      child: const Text("Save"),
+                      child: const Text("Update"),
                     ),
                   )
                 ],

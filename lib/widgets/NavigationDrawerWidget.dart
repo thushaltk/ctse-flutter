@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:humanoid_ctse/screens/AdminLoginScreen.dart';
+import 'package:humanoid_ctse/screens/AboutScreen.dart';
+import 'package:humanoid_ctse/screens/auth/AdminLoginScreen.dart';
 import 'package:humanoid_ctse/screens/HomeScreen.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NavigationDrawyerWidget extends StatelessWidget {
   const NavigationDrawyerWidget({Key? key}) : super(key: key);
@@ -59,19 +61,29 @@ class NavigationDrawyerWidget extends StatelessWidget {
                     ),
                   )),
               SizedBox(
-                height: 280,
+                height: 250,
                 child: ListView(
                   children: <Widget>[
                     buildMenuItem(
-                      text: 'Home', 
-                      icon: Icons.home_filled,
-                      tapHandler: () {
+                        text: 'Home',
+                        icon: Icons.home_filled,
+                        tapHandler: () {
+                          Navigator.of(context).pushNamed(HomeScreen.routeName);
+                        }),
+                    buildMenuItem(
+                        text: 'About',
+                        icon: Icons.info,
+                        tapHandler: () {
                           Navigator.of(context)
-                              .pushNamed(HomeScreen.routeName);
-                        }
-                      ),
-                    buildMenuItem(text: 'Help', icon: Icons.help),
-                    buildMenuItem(text: 'Share', icon: Icons.share),
+                              .pushNamed(AboutScreen.routeName);
+                        }),
+                    buildMenuItem(
+                      text: 'Share',
+                      icon: Icons.share,
+                      tapHandler: () {
+                        Share.share('Share this app');
+                      },
+                    ),
                     buildMenuItem(
                         text: 'Admin',
                         icon: Icons.admin_panel_settings,

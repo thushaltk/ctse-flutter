@@ -17,7 +17,7 @@ class LegsServices {
         for (var doc in querySnapshot.docs.toList()) {
           Map temp = {
             "id": doc.id,
-            "imageURL": doc['imageURL'],
+            "imageURL": doc['imageUrl'],
             "name": doc['name'],
             "description": doc['description'],
             "diseases": doc['diseases']
@@ -34,13 +34,13 @@ class LegsServices {
 
   //add data
   Future<void> insertData(
-      String? imageUrl, String name, String description) async {
+      String? imageUrl, String name, String description, String diseases) async {
     try {
       await firestore.collection("body-legs").add({
         'imageUrl': imageUrl,
         'name': name,
         'description': description,
-        'diseases': []
+        'diseases': diseases
       });
     } catch (e) {
       print(e);
@@ -57,7 +57,7 @@ class LegsServices {
             'name': name, 
             'description': description,
             'imageUrl': imageUrl,
-            'diseases': []});
+            'diseases': diseases});
     } catch (e) {
       print(e);
     }

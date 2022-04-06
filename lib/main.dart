@@ -1,9 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:humanoid_ctse/screens/AboutScreen.dart';
 import 'package:humanoid_ctse/screens/AddHandsPartsScreen.dart';
 import 'package:humanoid_ctse/screens/AddHeadPartsScreen.dart';
+import 'package:humanoid_ctse/screens/AddLegsPartsScreen.dart';
 import 'package:humanoid_ctse/screens/AddTorsoPartsScreen.dart';
-import 'package:humanoid_ctse/screens/AdminLoginScreen.dart';
+import 'package:humanoid_ctse/screens/DisplayHandsItems.dart';
+import 'package:humanoid_ctse/screens/DisplayHeadItems.dart';
+import 'package:humanoid_ctse/screens/DisplayLegsItems.dart';
+import 'package:humanoid_ctse/screens/DisplayTorsoItems.dart';
+import 'package:humanoid_ctse/screens/auth/AdminLoginScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardAdminScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardHandsScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
@@ -11,10 +17,13 @@ import 'package:humanoid_ctse/screens/DashboardLegsScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardTorsoScreen.dart';
 import 'package:humanoid_ctse/screens/EditHeadPartScreen.dart';
 import 'package:humanoid_ctse/screens/HomeScreen.dart';
+import 'package:humanoid_ctse/screens/auth/AdminSignupScreen.dart';
+import 'package:humanoid_ctse/services/AuthServices.dart';
 import 'package:humanoid_ctse/services/HandsServices.dart';
 import 'package:humanoid_ctse/services/HeadServices.dart';
 import 'package:humanoid_ctse/services/LegsServices.dart';
 import 'package:humanoid_ctse/services/TorsoServices.dart';
+import 'package:provider/provider.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(1, 77, 123, .1),
@@ -61,12 +70,12 @@ class _MyAppState extends State<MyApp> {
     handsServices!.initialise();
   }
 
-  initaliseLegsService(){
+  initaliseLegsService() {
     legsServices = LegsServices();
     legsServices!.initialise();
   }
 
-  initaliseTorsoService(){
+  initaliseTorsoService() {
     torsoServices = TorsoServices();
     torsoServices!.initialise();
   }
@@ -82,32 +91,45 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HUMANOID',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: colorCustom,
-      ),
-      home: HomeScreen(),
-      routes: {
-        AdminLoginScreen.routeName: (ctx) => const AdminLoginScreen(),
-        HomeScreen.routeName: (ctx) => HomeScreen(),
-        DashboardAdminScreen.routeName : (ctx) => const DashboardAdminScreen(),
-        DashboardHeadScreen.routeName : (ctx) => const DashboardHeadScreen(),
-        DashboardHandsScreen.routeName : (ctx) => const DashboardHandsScreen(),
-        DashboardTorsoScreen.routeName : (ctx) => const DashboardTorsoScreen(),
-        DashboardLegsScreen.routeName : (ctx) => const DashboardLegsScreen(),
-        AddHeadPartsScreen.routeName : (ctx) => AddHeadPartsScreen(headServices: headServices!),AddHandsPartsScreen.routeName : (ctx) => AddHandsPartsScreen(handsServices: handsServices!),
-        AddTorsoPartsScreen.routeName : (ctx) => AddTorsoPartsScreen(torsoServices: torsoServices!),
-      },
-    );
+    return MultiProvider(
+        providers: [ChangeNotifierProvider.value(value: AuthService())],
+        child: Consumer<AuthService>(
+          builder: (ctx, auth, _) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'HUMANOID',
+            theme: ThemeData(
+              primarySwatch: colorCustom,
+            ),
+            home: HomeScreen(),
+            routes: {
+              AdminLoginScreen.routeName: (ctx) => const AdminLoginScreen(),
+              AdminSignupScreen.routeName: (ctx) => const AdminSignupScreen(),
+              HomeScreen.routeName: (ctx) => HomeScreen(),
+              DashboardAdminScreen.routeName: (ctx) =>
+                  const DashboardAdminScreen(),
+              DashboardHeadScreen.routeName: (ctx) =>
+                  const DashboardHeadScreen(),
+              DashboardHandsScreen.routeName: (ctx) =>
+                  const DashboardHandsScreen(),
+              DashboardTorsoScreen.routeName: (ctx) =>
+                  const DashboardTorsoScreen(),
+              DashboardLegsScreen.routeName: (ctx) =>
+                  const DashboardLegsScreen(),
+              AddHeadPartsScreen.routeName: (ctx) =>
+                  AddHeadPartsScreen(headServices: headServices!),
+              AddLegsPartsScreen.routeName: (ctx) =>
+                  AddLegsPartsScreen(legsServices: legsServices!),
+              AddHandsPartsScreen.routeName: (ctx) =>
+                  AddHandsPartsScreen(handsServices: handsServices!),
+              AddTorsoPartsScreen.routeName: (ctx) =>
+                  AddTorsoPartsScreen(torsoServices: torsoServices!),
+              DisplayHeadItems.routeName: (ctx) => const DisplayHeadItems(),
+              DisplayHandsItems.routeName: (ctx) => const DisplayHandsItems(),
+              DisplayLegsItems.routeName: (ctx) => const DisplayLegsItems(),
+              DisplayTorsoItems.routeName: (ctx) => const DisplayTorsoItems(),
+              AboutScreen.routeName: (ctx) => const AboutScreen()
+            },
+          ),
+        ));
   }
 }

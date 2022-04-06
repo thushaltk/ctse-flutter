@@ -135,6 +135,7 @@ class _AddLegsPartsScreenState extends State<AddLegsPartsScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    maxLines: 3,
                     obscureText: false,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -162,7 +163,7 @@ class _AddLegsPartsScreenState extends State<AddLegsPartsScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         widget.legsServices
-                            .insertData(imageURL, nameController.text, descriptionController.text);
+                            .insertData(imageURL, nameController.text, descriptionController.text, diseasesController.text);
                         Navigator.pop(context, true);
                         // Navigator.of(context)
                         //     .pushNamed(DashboardAdminScreen.routeName);

@@ -133,6 +133,7 @@ class _AddTorsoPartsScreenState extends State<AddTorsoPartsScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    maxLines: 3,
                     obscureText: false,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -160,7 +161,7 @@ class _AddTorsoPartsScreenState extends State<AddTorsoPartsScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         widget.torsoServices
-                            .insertData(imageURL, nameController.text, descriptionController.text);
+                            .insertData(imageURL, nameController.text, descriptionController.text, diseasesController.text);
                         Navigator.pop(context, true);
                         // Navigator.of(context)
                         //     .pushNamed(DashboardAdminScreen.routeName);

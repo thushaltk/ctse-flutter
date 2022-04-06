@@ -134,6 +134,7 @@ class _AddHandsPartsScreenState extends State<AddHandsPartsScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    maxLines: 3,
                     obscureText: false,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -161,7 +162,7 @@ class _AddHandsPartsScreenState extends State<AddHandsPartsScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         widget.handsServices
-                            .insertData(imageURL, nameController.text, descriptionController.text);
+                            .insertData(imageURL, nameController.text, descriptionController.text, diseasesController.text);
                         Navigator.pop(context, true);
                         // Navigator.of(context)
                         //     .pushNamed(DashboardAdminScreen.routeName);

@@ -207,7 +207,7 @@ class _EditTorsoPartsScreenState extends State<EditTorsoPartsScreen> {
                               borderRadius: BorderRadius.circular(18.0),
                               side: const BorderSide(
                                   color: Color.fromARGB(255, 1, 77, 123)))),
-                      child: const Text("Save"),
+                      child: const Text("Update"),
                     ),
                   )
                 ],

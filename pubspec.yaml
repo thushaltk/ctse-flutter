@@ -39,6 +39,10 @@ dependencies:
   touchable:
   xml:
   flutter_svg: ^1.0.3
+  provider: ^6.0.2
+  font_awesome_flutter: ^10.1.0
+  url_launcher: ^6.0.20
+  share_plus: ^4.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -71,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/images/body.png
     - assets/images/body.svg
     - assets/images/head.png
     - assets/images/hand.png
@@ -80,6 +85,10 @@ flutter:
     - assets/images/torso_white.png
     - assets/images/hands_white.png
     - assets/images/legs_white.png
+    - assets/images/thushal.jpeg
+    - assets/images/rusira.jpeg
+    - assets/images/eishan.jpg
+    - assets/images/kishen.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

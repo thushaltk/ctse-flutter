@@ -34,13 +34,13 @@ class HeadServices {
 
   //add data
   Future<void> insertData(
-      String? imageUrl, String name, String description) async {
+      String? imageUrl, String name, String description, String diseases) async {
     try {
       await firestore.collection("body-head").add({
         'imageUrl': imageUrl,
         'name': name,
         'description': description,
-        'diseases': []
+        'diseases': diseases
       });
     } catch (e) {
       print(e);
@@ -57,7 +57,7 @@ class HeadServices {
             'name': name, 
             'description': description,
             'imageUrl': imageUrl,
-            'diseases': []});
+            'diseases': diseases});
     } catch (e) {
       print(e);
     }
