@@ -111,6 +111,7 @@ class _DashboardHandsScreenState extends State<DashboardHandsScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ItemLongCardWidget(
                         service: handsServices,
+                        parentName: "HANDS",
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],

@@ -112,6 +112,7 @@ class _DashboardTorsoScreenState extends State<DashboardTorsoScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ItemLongCardWidget(
                         service: torsoServices,
+                        parentName: "TORSO",
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],

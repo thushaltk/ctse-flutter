@@ -109,6 +109,7 @@ class _DashboardHeadScreenState extends State<DashboardHeadScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ItemLongCardWidget(
                         service: headServices,
+                        parentName: "HEADS",
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],

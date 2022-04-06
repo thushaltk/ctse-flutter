@@ -112,6 +112,7 @@ class _DashboardLegsScreenState extends State<DashboardLegsScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ItemLongCardWidget(
                         service: legsServices,
+                        parentName: "LEGS",
                           id: docs[index]['id'],
                           imageUrl: docs[index]['imageURL'],
                           name: docs[index]['name'],

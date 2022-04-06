@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:humanoid_ctse/screens/EditHandPartScreen.dart';
 import 'package:humanoid_ctse/screens/EditHeadPartScreen.dart';
+import 'package:humanoid_ctse/screens/EditLegsPartsScreen.dart';
+import 'package:humanoid_ctse/screens/EditTorsoPartsScreen.dart';
 
 import '../services/HeadServices.dart';
 
 class ItemLongCardWidget extends StatelessWidget {
   final service;
+  final String? parentName;
   final String? id;
   final String? imageUrl;
   final String? name;
@@ -15,6 +18,7 @@ class ItemLongCardWidget extends StatelessWidget {
 
   ItemLongCardWidget(
       {Key? key,
+      required this.parentName,
       required this.service,
       required this.id,
       required this.imageUrl,
@@ -77,19 +81,59 @@ class ItemLongCardWidget extends StatelessWidget {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          //todo: Edit part
-                          Navigator.push(
-                            context, MaterialPageRoute(builder:
-                             (context) => EditHandPartsScreen(
-                               description: description!, 
-                               handServices:service, 
-                               id: id!, 
-                               diseases: diseases!, 
-                               imageUrl: imageUrl!, 
-                               name: name!,
-                              )
-                            )
-                          );
+                          parentName == "HEAD"
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditHeadPartsScreen(
+                                            description: description!,
+                                            headServices: service,
+                                            id: id!,
+                                            diseases: diseases!,
+                                            imageUrl: imageUrl!,
+                                            name: name!,
+                                          )))
+                              : parentName == "HANDS"
+                                  ? Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditHandPartsScreen(
+                                                description: description!,
+                                                handServices: service,
+                                                id: id!,
+                                                diseases: diseases!,
+                                                imageUrl: imageUrl!,
+                                                name: name!,
+                                              )))
+                                  : parentName == "TORSO"
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditTorsoPartsScreen(
+                                                    description: description!,
+                                                    torsoServices: service,
+                                                    id: id!,
+                                                    diseases: diseases!,
+                                                    imageUrl: imageUrl!,
+                                                    name: name!,
+                                                  )))
+                                      : parentName == "LEGS"
+                                          ? Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditLegsPartsScreen(
+                                                        description:
+                                                            description!,
+                                                        legsServices: service,
+                                                        id: id!,
+                                                        diseases: diseases!,
+                                                        imageUrl: imageUrl!,
+                                                        name: name!,
+                                                      )))
+                                          : '';
                         },
                         child: const Icon(
                           Icons.edit,
