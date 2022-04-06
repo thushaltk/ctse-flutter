@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:humanoid_ctse/widgets/BottomCardWidget.dart';
 import 'package:humanoid_ctse/widgets/NavigationDrawerWidget.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
 import 'package:touchable/touchable.dart';
@@ -21,10 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<GeneralBodyPart> generalBodyParts = [];
   final String svgimage = 'assets/images/body.svg';
 
-   @override
-  void initState(){
+  @override
+  void initState() {
     super.initState();
-    loadSvgImage(svgImage: svgimage);
   }
 
   void _onTap(BuildContext context, Offset globalPosition) {
@@ -32,25 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (renderBox is RenderBox) {
       final localPosition = renderBox.globalToLocal(globalPosition);
       print(localPosition);
-    }
-  }
-
-  Future<void> loadSvgImage(
-      {required String svgImage}) async {
-    String generalString = await rootBundle.loadString(svgImage);
-
-    XmlDocument document = XmlDocument.parse(generalString);
-
-    final paths = document.findAllElements('path');
-
-    for (var element in paths) {
-      String partName = element.getAttribute('id').toString();
-      String partPath = element.getAttribute('d').toString();
-
-      if (!partName.contains('path')) {
-        GeneralBodyPart part = GeneralBodyPart(name: partName, path: partPath);
-        generalBodyParts.add(part);
-      }
     }
   }
 
@@ -70,66 +51,43 @@ class _HomeScreenState extends State<HomeScreen> {
             fit: BoxFit.contain,
           )),
       body: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(28.0),
-          child: GestureDetector(
-              onTapDown: (details) => _onTap(context, details.globalPosition),
-              child: CanvasTouchDetector(
-                builder: ((context) => CustomPaint( 
-                  painter: BodyPainter(
-                    context: context,
-                    model: generalBodyParts
-                  ),
-                ))
-              )
-            )
-          ),
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              height: 500,
+              width: double.infinity,
+              child: Image.asset(
+                'assets/images/body.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+            
+            Container(
+              width: double.infinity,
+              height: 53,
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  BottomCardWidget(name: "HEAD"),
+                  BottomCardWidget(name: "HANDS"),
+                  BottomCardWidget(name: "TORSO"),
+                  BottomCardWidget(name: "LEGS"),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-}
-
-class BodyPainter extends CustomPainter {
-  final BuildContext context;
-  final List<GeneralBodyPart> model;
-
-  BodyPainter({
-    required this.context,
-    required this.model
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-  
-    var myCanvas = TouchyCanvas(context, canvas);
-
-    Paint paint = Paint()
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 8.0;
-
-    // Scale each path to match canvas size
-    var xScale = size.width / 222;
-    var yScale = size.height / 400;
-    final Matrix4 matrix4 = Matrix4.identity();
-
-    matrix4.scale(xScale, yScale);
-
-    Path? bodyPath;
-
-    List<GeneralBodyPart> generalParts = model;
-
-    for (var muscle in generalParts) {
-      Path path = parseSvgPath(muscle.path);
-      paint.color = Colors.white10;
-      myCanvas.drawPath(
-        path.transform(matrix4.storage),
-        paint,
-        onTapDown: (details) {
-          //model.selectGeneralBodyPart(muscle.name);
-        },
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
