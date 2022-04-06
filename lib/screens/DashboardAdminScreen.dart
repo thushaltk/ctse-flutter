@@ -3,6 +3,7 @@ import 'package:humanoid_ctse/screens/DashboardHandsScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardHeadScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardLegsScreen.dart';
 import 'package:humanoid_ctse/screens/DashboardTorsoScreen.dart';
+import 'package:humanoid_ctse/screens/auth/AdminLoginScreen.dart';
 import 'package:humanoid_ctse/widgets/DashboardCardWidget.dart';
 
 class DashboardAdminScreen extends StatefulWidget {
@@ -30,18 +31,34 @@ class _DashboardAdminScreenState extends State<DashboardAdminScreen> {
                     const BoxDecoration(color: Color.fromARGB(255, 1, 77, 123)),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(18.0, 0, 0, 10.0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Dashboard.",
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text(
+                          "Dashboard",
                           style: TextStyle(
                               fontFamily: "Tenorite",
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 50),
                           textAlign: TextAlign.start,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 15),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(AdminLoginScreen.routeName);
+                            },
+                            child: const Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         )
                       ]),
                 ),
@@ -50,11 +67,26 @@ class _DashboardAdminScreenState extends State<DashboardAdminScreen> {
             const SizedBox(
               height: 30,
             ),
-            DashboardCardWidget(imageUrl: Image.asset('assets/images/head.png'), name: "HEAD", routename: DashboardHeadScreen.routeName,),
-            DashboardCardWidget(imageUrl: Image.asset('assets/images/hand.png'), name: "HAND", 
-            routename: DashboardHandsScreen.routeName,),
-            DashboardCardWidget(imageUrl: Image.asset('assets/images/torso.png'), name: "TORSO", routename: DashboardTorsoScreen.routeName,),
-            DashboardCardWidget(imageUrl: Image.asset('assets/images/legs.png'), name: "LEGS", routename: DashboardLegsScreen.routeName,),
+            DashboardCardWidget(
+              imageUrl: Image.asset('assets/images/head.png'),
+              name: "HEAD",
+              routename: DashboardHeadScreen.routeName,
+            ),
+            DashboardCardWidget(
+              imageUrl: Image.asset('assets/images/hand.png'),
+              name: "HAND",
+              routename: DashboardHandsScreen.routeName,
+            ),
+            DashboardCardWidget(
+              imageUrl: Image.asset('assets/images/torso.png'),
+              name: "TORSO",
+              routename: DashboardTorsoScreen.routeName,
+            ),
+            DashboardCardWidget(
+              imageUrl: Image.asset('assets/images/legs.png'),
+              name: "LEGS",
+              routename: DashboardLegsScreen.routeName,
+            ),
           ],
         ),
       ),
